@@ -95,7 +95,6 @@ def handle_tsemo(dataset: Dataset) -> PredictionResponse:
         maximize=False,
     )
 
-
     lower_bound = np.floor(ds['CO2e'].min())
     upper_bound = np.ceil(ds['CO2e'].max())
 
