@@ -175,7 +175,7 @@ def handle_tsemo(dataset: Dataset) -> PredictionResponse:
 
     par_eto = exp.pareto_data.round(2)
     type(par_eto)
-
+    """
     """## Save file"""
 
     import pandas as pd
@@ -200,7 +200,7 @@ def handle_tsemo(dataset: Dataset) -> PredictionResponse:
     # Generate a download link for the CSV file
     from google.colab import files
     files.download(csv_filename)
-
+    """
     """### 3D Pareto Plot
     
     ### Heat Map
@@ -215,11 +215,14 @@ def handle_tsemo(dataset: Dataset) -> PredictionResponse:
     from matplotlib.colors import Normalize
 
     # Load your CSV file, skipping rows that are not needed
-    df = pd.DataFrame(dataset.input)
+    #df = pd.DataFrame(dataset.input)
+    df = par_eto
 
 
     # Load the CSV file, skipping the first two rows and selecting columns 4, 5, 6, and 7
-    data = np.loadtxt('NitroBENZENE_4O_pareto2024_11_27_16_23.csv', delimiter=',', skiprows=2, usecols=(3, 4, 5, 6))
+    # data = np.loadtxt('NitroBENZENE_4O_pareto2024_11_27_16_23.csv', delimiter=',', skiprows=2, usecols=(3, 4, 5, 6))
+    data = par_eto
+
 
     # Create the ndarray
     Obj4_pareto_ndarray = np.array(data)
