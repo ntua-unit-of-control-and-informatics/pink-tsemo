@@ -178,28 +178,28 @@ def handle_tsemo(dataset: Dataset) -> PredictionResponse:
     """
     """## Save file"""
 
-    import pandas as pd
-    from datetime import datetime
+     # import pandas as pd
+    # from datetime import datetime
 
-    utc_now = datetime.utcnow()
+    # utc_now = datetime.utcnow()
 
-    import pytz
+    # import pytz
 
-    # Define the timezone for Greece (Eastern European Time)
-    greek_tz = pytz.timezone('Europe/Athens')
+    # # Define the timezone for Greece (Eastern European Time)
+    # greek_tz = pytz.timezone('Europe/Athens')
 
-    # Convert UTC time to Greek time
-    greek_now = utc_now.astimezone(greek_tz)
+    # # Convert UTC time to Greek time
+    # greek_now = utc_now.astimezone(greek_tz)
 
-    formatted_time = greek_now.strftime('%Y_%m_%d_%H_%M')
-    csv_filename = f"NitroBENZENE_4O_pareto{formatted_time}.csv"
+    # formatted_time = greek_now.strftime('%Y_%m_%d_%H_%M')
+    # csv_filename = f"NitroBENZENE_4O_pareto{formatted_time}.csv"
 
-    print(f"File name with Greek time: {csv_filename}")
-    par_eto.to_csv(csv_filename, index=False)
+    # print(f"File name with Greek time: {csv_filename}")
+    # par_eto.to_csv(csv_filename, index=False)
 
-    # Generate a download link for the CSV file
-    from google.colab import files
-    files.download(csv_filename)
+    # # Generate a download link for the CSV file
+    # from google.colab import files
+    # files.download(csv_filename)
     """
     """### 3D Pareto Plot
     
