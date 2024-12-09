@@ -1,5 +1,6 @@
 import numpy as np
 from jaqpot_api_client.models.dataset import Dataset
+from jaqpot_api_client.models.model import Model
 from jaqpot_api_client.models.prediction_response import PredictionResponse
 from summit.benchmarks import ExperimentalEmulator
 from summit.domain import *
@@ -10,15 +11,9 @@ from summit import Runner
 from summit.strategies import TSEMO
 
 
-def handle_tsemo(dataset: Dataset) -> PredictionResponse:
+def handle_tsemo(model: Model, dataset: Dataset) -> PredictionResponse:
 
-    """## Load Data
-
-    We now load in the data from past experiments, which we will use to train the emulator. Here, we import the data that we already have in the Summit package, but any data available in CSV format would work.
-    """
-
-    # Read in data into a DataSEt.
-    ds = DataSet.read_csv("NitroBENZENE_DataMatrix_4O_2024_09_27_05_07.csv",)
+    ds = DataSet(dataset.input)
 
     """## Domain
     
@@ -262,3 +257,6 @@ def handle_tsemo(dataset: Dataset) -> PredictionResponse:
     plt.show()
 
     """# END"""
+
+
+

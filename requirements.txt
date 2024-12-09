@@ -14,6 +14,7 @@ Deprecated==1.2.15
 dill==0.3.9
 exceptiongroup==1.2.2
 fastapi==0.115.5
+uvicorn==0.32.1
 fastprogress==0.2.6
 fonttools==4.55.0
 GPy==1.13.2
@@ -66,3 +67,5 @@ tqdm==4.67.1
 typing_extensions==4.12.2
 wrapt==1.17.0
 zipp==3.21.0
+jaqpot-api-client==6.38.0
+urllib3==2.2.3
