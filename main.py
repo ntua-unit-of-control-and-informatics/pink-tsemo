@@ -15,7 +15,7 @@ def read_root():
 
 @app.post("/infer")
 def predict(req: PredictionRequest) -> PredictionResponse:
-    return handle_tsemo(req.model, req.dataset.input)
+    return handle_tsemo(req.model, req.dataset)
 
 
 if __name__ == "__main__":

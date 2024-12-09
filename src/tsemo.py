@@ -14,6 +14,9 @@ from summit.strategies import TSEMO
 def handle_tsemo(model: Model, dataset: Dataset) -> PredictionResponse:
 
     ds = DataSet(dataset.input)
+    cols = ds.columns
+    for col in cols:
+        ds[col] = ds[col].astype(float)
 
     """## Domain
     
@@ -218,7 +221,6 @@ def handle_tsemo(model: Model, dataset: Dataset) -> PredictionResponse:
     # data = np.loadtxt('NitroBENZENE_4O_pareto2024_11_27_16_23.csv', delimiter=',', skiprows=2, usecols=(3, 4, 5, 6))
     data = par_eto
 
-
     # Create the ndarray
     Obj4_pareto_ndarray = np.array(data)
 
@@ -258,5 +260,5 @@ def handle_tsemo(model: Model, dataset: Dataset) -> PredictionResponse:
 
     """# END"""
 
-
+    return PredictionResponse(predictions=data)
 
