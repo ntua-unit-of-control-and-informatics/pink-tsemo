@@ -32,92 +32,47 @@ def handle_tsemo(model: Model, dataset: Dataset) -> PredictionResponse:
     Below, we use `ContinuousVariable` to specify the rest of the decision variables. Each has `bounds`, which represent the minimum and maximum values of each variable.
     """
 
-    # Decision variables
+    df = DataSet.read_csv("NitroBENZENE_DataMatrix_4O_2024_09_27_05_07.csv",)
 
-    lower_bound = np.floor(ds['R_T'].min())
-    upper_bound = np.ceil(ds['R_T'].max())
+## Define the number of objectives and their optimization direction
+# num_objectives = 2  # Example: User-defined number of objectives
+# objective_directions = ["minimize", "minimize"]  # Example: User-defined directions
 
-    des_1 = "Reactor's temperature (C)"
-    domain += ContinuousVariable(name="R_T", description=des_1, bounds=[lower_bound, upper_bound])
+# Load the data, skipping the second row which contains 'DATA'
+# attention! selecting the row with the names of the vars
+# df_skip = pd.read_csv("NitroBENZENE_DataMatrix_4O_2024_09_27_05_07.csv", skiprows=[1])
 
-    lower_bound = np.floor(ds['ResTime'].min())
-    upper_bound = np.ceil(ds['ResTime'].max())
+# Extract column names excluding the first column
+variables = df_skip.columns[1:].tolist()
 
-    des_2 = "Residence time (hr)"
+# Set descriptions to be the same as variables
+descriptions = variables.copy()
+
+
+# Determine the decision variables and objective variables based on the number of objectives
+decision_vars = variables[:-num_objectives]
+decision_descriptions = descriptions[:-num_objectives]
+
+objective_vars = variables[-num_objectives:]
+objective_descriptions = descriptions[-num_objectives:]
+
+# Build the domain based on the selection of is_objective
+for var, desc in zip(decision_vars, decision_descriptions):
+    lower_bound = np.floor(df[var].min())
+    upper_bound = np.ceil(df[var].max())
+    domain += ContinuousVariable(name=var, description=desc, bounds=[lower_bound, upper_bound])
+
+for var, desc, direction in zip(objective_vars, objective_descriptions, objective_directions):
+    lower_bound = np.floor(df[var].min())
+    upper_bound = np.ceil(df[var].max())
+    maximize = True if direction == "maximize" else False
     domain += ContinuousVariable(
-        name="ResTime", description=des_2, bounds=[lower_bound, upper_bound]
-    )
-
-    lower_bound = np.floor(ds['B2A_ratio'].min())
-    upper_bound = np.ceil(ds['B2A_ratio'].max())
-
-    des_3 = "Benzene to Acids solution ratio (w/w)"
-    domain += ContinuousVariable(
-        name="B2A_ratio", description=des_3, bounds=[lower_bound, upper_bound]
-    )
-
-    """### Objectives
-    
-    Finally, we specify the objectives. We use `ContinuousVariable` again, but set `is_objective` to `True` and specify whether to maximize (or minimize) each objective.
-    """
-
-    # Objectives
-
-    # 'NB_Yield',  'DNB_Yield',  'CO2e',  'TOTALCOST'
-
-    lower_bound = np.floor(ds['NB_Yield'].min())
-    upper_bound = np.ceil(ds['NB_Yield'].max())
-
-    des_4 = (
-        "NitroBENZENE yield % (mol C₆H₅NO₂/mol C6H6 %)"
-    )
-    domain += ContinuousVariable(
-        name="NB_Yield",
-        description=des_4,
+        name=var,
+        description=desc,
         bounds=[lower_bound, upper_bound],
         is_objective=True,
-        maximize=True,
+        maximize=maximize
     )
-
-    lower_bound = np.floor(ds['DNB_Yield'].min())
-    upper_bound = np.ceil(ds['DNB_Yield'].max())
-
-    des_5 = (
-        "DinitroBENZENE yield (mol C₆H₄N₂O₄/hr)"
-    )
-    domain += ContinuousVariable(
-        name="DNB_Yield",
-        description=des_5,
-        bounds=[lower_bound, upper_bound],
-        is_objective=True,
-        maximize=False,
-    )
-
-    lower_bound = np.floor(ds['CO2e'].min())
-    upper_bound = np.ceil(ds['CO2e'].max())
-
-    des_6 = "Emissions CO2e (kg CO2e/hr)"
-    domain += ContinuousVariable(
-        name="CO2e",
-        description=des_6,
-        bounds=[lower_bound, upper_bound],
-        is_objective=True,
-        maximize=False,
-    )
-
-    lower_bound = np.floor(ds['TOTALCOST'].min())
-    upper_bound = np.ceil(ds['TOTALCOST'].max())
-    # annualized total cost reduced to cost per kg nitrobenzene
-
-    des_7 = "TOTAL COST  ($)"
-    domain += ContinuousVariable(
-        name="TOTALCOST",
-        description=des_7,
-        bounds=[lower_bound, upper_bound],
-        is_objective=True,
-        maximize=False,
-    )
-
     """When working inside a Jupyter Notebook, we can view the domain by putting it at the end of a cell and pressing enter.
     
     #### Domain view
