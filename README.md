@@ -1,12 +1,10 @@
-**README**
-
 **Abstract**
 
 This algorithm is designed to optimize the reaction conditions for a chemical production process. It utilizes a multi-objective optimization strategy, specifically the TSEMO (Thompson Sampling Efficient Multi-objective Optimization) algorithm, to maximize yield and minimize undesirable by-products and costs. The algorithm reads input data, defines decision variables and objectives, trains an experimental emulator, and performs optimization to identify the best reaction conditions and process parameters.
 
 **Input File Description**
 
-The input file Input\_file.csv (NitroBENZENE\_DataMatrix\_4O\_2024\_12\_27\_22\_54\_vars\_units
+The input file Input\_file.csv [data/NitroBENZENE_DataMatrix_4O_2024_12_27_22_54_vars_units.csv](data/NitroBENZENE_DataMatrix_4O_2024_12_27_22_54_vars_units.csv)
 
 .csv for the example) contains experimental data for the optimization process. The file is structured as follows:
 
