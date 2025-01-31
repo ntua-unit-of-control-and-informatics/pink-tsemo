@@ -4,9 +4,9 @@ This algorithm is designed to optimize the reaction conditions for a chemical pr
 
 **Input File Description**
 
-The input file Input\_file.csv [data/NitroBENZENE_DataMatrix_4O_2024_12_27_22_54_vars_units.csv](data/NitroBENZENE_DataMatrix_4O_2024_12_27_22_54_vars_units.csv)
+The input CSV file  [data/NitroBENZENE_DataMatrix_4O_2024_12_27_22_54_vars_units.csv](data/NitroBENZENE_DataMatrix_4O_2024_12_27_22_54_vars_units.csv) contains experimental data for the optimization process. 
 
-.csv for the example) contains experimental data for the optimization process. The file is structured as follows:
+The file is structured as follows:
 
 * **First Row**: Column headers indicating the variables.
 
