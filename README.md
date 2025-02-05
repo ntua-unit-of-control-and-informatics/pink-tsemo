@@ -1,8 +1,14 @@
-**Abstract**
+# TSEMO algorithm
+
+The implementation is available as a Jupyter notebook [tsemo.ipynb](tsemo.ipynb) which can be opened and run in Google Colab. You can use this notebook to optimize your own chemical reaction conditions.
+
+This work was developed as part of the PINK project ([https://pink-project.eu/](https://pink-project.eu/)), a European initiative focused on developing Process Intensification through Novel Modular Equipment and Advanced Process Control. PINK aims to revolutionize chemical manufacturing by combining innovative reactor designs with advanced control and optimization strategies to make chemical processes more efficient, sustainable, and cost-effective.
+
+## Abstract
 
 This algorithm is designed to optimize the reaction conditions for a chemical production process. It utilizes a multi-objective optimization strategy, specifically the TSEMO (Thompson Sampling Efficient Multi-objective Optimization) algorithm, to maximize yield and minimize undesirable by-products and costs. The algorithm reads input data, defines decision variables and objectives, trains an experimental emulator, and performs optimization to identify the best reaction conditions and process parameters.
 
-**Input File Description**
+## Input File Description**
 
 The input CSV file  [data/NitroBENZENE_DataMatrix_4O_2024_12_27_22_54_vars_units.csv](data/NitroBENZENE_DataMatrix_4O_2024_12_27_22_54_vars_units.csv) contains experimental data for the optimization process. 
 
@@ -32,7 +38,7 @@ DATA,DATA,DATA,DATA,DATA,DATA,DATA,DATA
 
 176,Reactor Temperature (C),Residense time (hr),Benzen to acids ratio (w/w),NB\_Yield % (mol NB/mol C6H6),DNB\_Mol\_Yield (mol DNB/hr),CO2e (kg/hr),Total Cost ($)
 
-**Algorithm Description**
+## Algorithm Description
 
 The algorithm follows these steps:
 
@@ -76,7 +82,7 @@ The algorithm follows these steps:
 
    * For four objectives, create a 3D scatter plot with a heat map.
 
-**Results**
+## Results
 
 The results produced by the algorithm include:
 
